@@ -1,14 +1,12 @@
-import RPi.GPIO as GPIO
+import wiringpi
 from time import sleep
 
 
-GPIO.setmode(GPIO.BCM)
+wiringpi.wiringPiSetupGpio()
 pin=21#change it to whathever pin you want
-GPIO.setup(pin,GPIO.OUT)#you can add initial state with ,initial=GPIO.HIGH
-
+wiringpi.pinMode(pin,1) #set pin 21 to 1 (OUTPUT)
 while True:
 	sleep(0.5)
-	GPIO.output(pin,GPIO.HIGH)
+	wiringpi.digitalWrite(21,1)
 	sleep(0.5)
-	GPIO.output(pin,GPIO.LOW)
-	
+	wiringpi.digitalWrite(21,0)

@@ -1,16 +1,16 @@
-import RPi.GPIO as GPIO
+import wiringpi	
 from time import sleep
 
-GPIO.setmode(GPIO.BCM)
+wiringpi.wiringPiSetupGpio()
 outPin=21#change it to whathever pin you want
-inPin=20
-GPIO.setup(outPin,GPIO.OUT)#you can add initial state with ,initial=GPIO.HIGH
-GPIO.setup(inPin,GPIO.IN)#you can add initial state with ,initial=GPIO.HIGH
+inPin=20#change it to whathever pin you want
+wiringpi.pinMode(outPin,1) #set outPin to 1 (OUTPUT)
+wiringpi.pinMode(inPin,1) #set inPin to 0 (INPUT)
 
 while True:
-	if GPIO.input(inPin):
-		GPIO.output(outPin,GPIO.HIGH)
-		sleep(0.5)
+	if wiringpi.digitalRead(inPin)==1:
+		wiringpi.digitalWrite(outPin,1)
+		sleep(0.2)
 	else:
-		GPIO.output(outPin,GPIO.LOW)
-		sleep(0.5)
+		wiringpi.digitalWrite(outPin,0)
+		sleep(0.2)
